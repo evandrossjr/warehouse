@@ -44,7 +44,8 @@ public class ProdutoService {
         mov.setQuantidadeMovimentada(quantidade);
         mov.setTipo(tipo);
         mov.setDataHora(LocalDateTime.now());
-        movimentacaoRepository.save(mov);
+        movimentacaoRepository.savenow(mov);
+
     }
 
 
