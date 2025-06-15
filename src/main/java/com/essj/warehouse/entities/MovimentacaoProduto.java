@@ -6,7 +6,7 @@ import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
-public class MovimentacaoEstoque {
+public class MovimentacaoProduto {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,6 +23,17 @@ public class MovimentacaoEstoque {
     private LocalDateTime dataHora;
 
     private String observacao;
+
+    public MovimentacaoProduto(){}
+
+    public MovimentacaoProduto(Long id, Produto produto, int quantidadeMovimentada, TipoMovimentacao tipo, LocalDateTime dataHora, String observacao) {
+        this.id = id;
+        this.produto = produto;
+        this.quantidadeMovimentada = quantidadeMovimentada;
+        this.tipo = tipo;
+        this.dataHora = dataHora;
+        this.observacao = observacao;
+    }
 
     public Long getId() {
         return id;
