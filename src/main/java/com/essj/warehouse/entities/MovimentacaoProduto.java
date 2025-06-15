@@ -83,5 +83,16 @@ public class MovimentacaoProduto {
         this.observacao = observacao;
     }
 
-    // Getters e Setters
+
+    @Override
+    public String toString() {
+        return "MovimentacaoProduto{" +
+                "id=" + id +
+                ", produto=" + produto +
+                ", quantidadeMovimentada=" + quantidadeMovimentada +
+                ", tipo=" + tipo +
+                ", dataHora=" + dataHora +
+                ", observacao='" + observacao + '\'' +
+                '}';
+    }
 }
