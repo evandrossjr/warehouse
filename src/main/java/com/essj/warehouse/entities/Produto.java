@@ -8,6 +8,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Objects;
 
 @Entity
@@ -28,6 +29,9 @@ public class Produto implements Serializable {
     private String modelo;
     private String localizador;
     private Long quantidadeEmbalagem;
+
+    private int quantidade;
+    private BigDecimal preco;
 
     private double peso;
     private Long estoqueMaximo;
@@ -50,7 +54,7 @@ public class Produto implements Serializable {
         this.unidade = unidade;
     }
 
-    public Produto(Long id, String código, String nome, String ean, boolean ativo, String codigoFornecedor, String marca, String modelo, String localizador, Long quantidadeEmbalagem, double peso, Long estoqueMaximo, Long estoqueMinimo, String grupo, String classificacaoFiscal, String tipoDeProduto, Unidade unidade) {
+    public Produto(Long id, String código, String nome, String ean, boolean ativo, String codigoFornecedor, String marca, String modelo, String localizador, Long quantidadeEmbalagem, int quantidade, BigDecimal preco, double peso, Long estoqueMaximo, Long estoqueMinimo, String grupo, String classificacaoFiscal, String tipoDeProduto, Unidade unidade) {
         this.id = id;
         this.código = código;
         this.nome = nome;
@@ -61,6 +65,8 @@ public class Produto implements Serializable {
         this.modelo = modelo;
         this.localizador = localizador;
         this.quantidadeEmbalagem = quantidadeEmbalagem;
+        this.quantidade = quantidade;
+        this.preco = preco;
         this.peso = peso;
         this.estoqueMaximo = estoqueMaximo;
         this.estoqueMinimo = estoqueMinimo;
@@ -69,7 +75,6 @@ public class Produto implements Serializable {
         this.tipoDeProduto = tipoDeProduto;
         this.unidade = unidade;
     }
-
 
     public Long getId() {
         return id;
@@ -151,6 +156,22 @@ public class Produto implements Serializable {
         this.quantidadeEmbalagem = quantidadeEmbalagem;
     }
 
+    public int getQuantidade() {
+        return quantidade;
+    }
+
+    public void setQuantidade(int quantidade) {
+        this.quantidade = quantidade;
+    }
+
+    public BigDecimal getPreco() {
+        return preco;
+    }
+
+    public void setPreco(BigDecimal preco) {
+        this.preco = preco;
+    }
+
     public double getPeso() {
         return peso;
     }
@@ -217,5 +238,30 @@ public class Produto implements Serializable {
     @Override
     public int hashCode() {
         return Objects.hash(id, código);
+    }
+
+    @Override
+    public String toString() {
+        return "Produto{" +
+                "id=" + id +
+                ", código='" + código + '\'' +
+                ", nome='" + nome + '\'' +
+                ", ean='" + ean + '\'' +
+                ", ativo=" + ativo +
+                ", codigoFornecedor='" + codigoFornecedor + '\'' +
+                ", marca='" + marca + '\'' +
+                ", modelo='" + modelo + '\'' +
+                ", localizador='" + localizador + '\'' +
+                ", quantidadeEmbalagem=" + quantidadeEmbalagem +
+                ", quantidade=" + quantidade +
+                ", preco=" + preco +
+                ", peso=" + peso +
+                ", estoqueMaximo=" + estoqueMaximo +
+                ", estoqueMinimo=" + estoqueMinimo +
+                ", grupo='" + grupo + '\'' +
+                ", classificacaoFiscal='" + classificacaoFiscal + '\'' +
+                ", tipoDeProduto='" + tipoDeProduto + '\'' +
+                ", unidade=" + unidade +
+                '}';
     }
 }
