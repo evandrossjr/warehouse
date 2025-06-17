@@ -8,6 +8,7 @@ import com.essj.warehouse.repositories.MovimentacaoProdutoRepository;
 import com.essj.warehouse.repositories.ProdutoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 
@@ -18,10 +19,15 @@ public class ProdutoService {
     private ProdutoRepository produtoRepository;
 
     @Autowired
-    private MovimentacaoProdutoRepository movimentacaoRepository;
+    private MovimentacaoProdutoRepository movimentacaoProdutoRepository;
 
 
+    @Transactional
     public void registrarMovimentacao(Long produtoId, int quantidade, TipoMovimentacao tipo) {
+        if (quantidade <= 0) {
+            throw new IllegalArgumentException("Quantidade deve ser maior que zero");
+        }
+
         Produto produto = produtoRepository.findById(produtoId)
                 .orElseThrow(() -> new RuntimeException("Produto não encontrado"));
 
@@ -29,7 +35,7 @@ public class ProdutoService {
             throw new RuntimeException("Estoque insuficiente");
         }
 
-        // Atualiza estoque atual
+        // Atualiza estoque
         if (tipo == TipoMovimentacao.ENTRADA) {
             produto.setQuantidade(produto.getQuantidade() + quantidade);
         } else {
@@ -44,9 +50,11 @@ public class ProdutoService {
         mov.setQuantidadeMovimentada(quantidade);
         mov.setTipo(tipo);
         mov.setDataHora(LocalDateTime.now());
-        movimentacaoRepository.savenow(mov);
+        mov.setObservacao(""); // ou permitir passar como parâmetro
 
+        movimentacaoProdutoRepository.save(mov);
     }
+
 
 
 }
