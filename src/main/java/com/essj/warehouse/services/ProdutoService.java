@@ -1,16 +1,19 @@
 package com.essj.warehouse.services;
 
 
+import com.essj.warehouse.dto.ProdutoMinDTO;
 import com.essj.warehouse.entities.MovimentacaoProduto;
 import com.essj.warehouse.entities.Produto;
 import com.essj.warehouse.entities.enums.TipoMovimentacao;
 import com.essj.warehouse.repositories.MovimentacaoProdutoRepository;
 import com.essj.warehouse.repositories.ProdutoRepository;
+import jakarta.transaction.TransactionScoped;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 public class ProdutoService {
@@ -20,6 +23,20 @@ public class ProdutoService {
 
     @Autowired
     private MovimentacaoProdutoRepository movimentacaoProdutoRepository;
+
+    @Transactional
+    public List<ProdutoMinDTO> findAll(){
+        List<Produto> list = produtoRepository.findAll();
+        List<ProdutoMinDTO> listDto =  list.stream().map(x-> new ProdutoMinDTO(x)).toList();
+        return listDto;
+    }
+
+    @Transactional
+    public ProdutoMinDTO findById(Long id){
+        Produto result = produtoRepository.findById(id).get();
+        return new ProdutoMinDTO(result);
+    }
+
 
 
     @Transactional
