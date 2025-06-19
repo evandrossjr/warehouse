@@ -6,7 +6,7 @@ public class ProdutoMinDTO {
 
 
     private Long id;
-    private String código;
+    private String codigo;
     private String nome;
     private String grupo;
 
@@ -16,7 +16,7 @@ public class ProdutoMinDTO {
 
     public ProdutoMinDTO(Produto entity){
         id = entity.getId();
-        código = entity.getCódigo();
+        codigo = entity.getCodigo();
         nome = entity.getNome();
         grupo = entity.getGrupo();
     }
@@ -29,12 +29,12 @@ public class ProdutoMinDTO {
         this.id = id;
     }
 
-    public String getCódigo() {
-        return código;
+    public String getCodigo() {
+        return codigo;
     }
 
-    public void setCódigo(String código) {
-        this.código = código;
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
     }
 
     public String getNome() {

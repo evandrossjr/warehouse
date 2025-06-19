@@ -2,10 +2,7 @@ package com.essj.warehouse.entities;
 
 
 import com.essj.warehouse.entities.enums.Unidade;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -20,7 +17,7 @@ public class Produto implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String código;
+    private String codigo;
     private String nome;
     private String ean;
     private boolean ativo;
@@ -41,22 +38,23 @@ public class Produto implements Serializable {
     private String classificacaoFiscal;
     private String tipoDeProduto;
 
+    @Enumerated(EnumType.STRING)
     private Unidade unidade;
 
 
     public Produto() {
     }
 
-    public Produto(Long id, String código, String nome, Unidade unidade) {
+    public Produto(Long id, String codigo, String nome, Unidade unidade) {
         this.id = id;
-        this.código = código;
+        this.codigo = codigo;
         this.nome = nome;
         this.unidade = unidade;
     }
 
-    public Produto(Long id, String código, String nome, String ean, boolean ativo, String codigoFornecedor, String marca, String modelo, String localizador, Long quantidadeEmbalagem, int quantidade, BigDecimal preco, double peso, Long estoqueMaximo, Long estoqueMinimo, String grupo, String classificacaoFiscal, String tipoDeProduto, Unidade unidade) {
+    public Produto(Long id, String codigo, String nome, String ean, boolean ativo, String codigoFornecedor, String marca, String modelo, String localizador, Long quantidadeEmbalagem, int quantidade, BigDecimal preco, double peso, Long estoqueMaximo, Long estoqueMinimo, String grupo, String classificacaoFiscal, String tipoDeProduto, Unidade unidade) {
         this.id = id;
-        this.código = código;
+        this.codigo = codigo;
         this.nome = nome;
         this.ean = ean;
         this.ativo = ativo;
@@ -84,12 +82,12 @@ public class Produto implements Serializable {
         this.id = id;
     }
 
-    public String getCódigo() {
-        return código;
+    public String getCodigo() {
+        return codigo;
     }
 
-    public void setCódigo(String código) {
-        this.código = código;
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
     }
 
     public String getNome() {
@@ -232,19 +230,19 @@ public class Produto implements Serializable {
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         Produto produto = (Produto) o;
-        return Objects.equals(id, produto.id) && Objects.equals(código, produto.código);
+        return Objects.equals(id, produto.id) && Objects.equals(codigo, produto.codigo);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, código);
+        return Objects.hash(id, codigo);
     }
 
     @Override
     public String toString() {
         return "Produto{" +
                 "id=" + id +
-                ", código='" + código + '\'' +
+                ", codigo='" + codigo + '\'' +
                 ", nome='" + nome + '\'' +
                 ", ean='" + ean + '\'' +
                 ", ativo=" + ativo +
