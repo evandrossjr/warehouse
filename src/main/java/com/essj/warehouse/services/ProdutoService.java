@@ -73,5 +73,8 @@ public class ProdutoService {
     }
 
 
+    public void delete(Long id){
+        produtoRepository.deleteById(id);
+    }
 
 }

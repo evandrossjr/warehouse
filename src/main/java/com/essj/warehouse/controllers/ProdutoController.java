@@ -4,10 +4,8 @@ package com.essj.warehouse.controllers;
 import com.essj.warehouse.dto.ProdutoMinDTO;
 import com.essj.warehouse.services.ProdutoService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -28,5 +26,11 @@ public class ProdutoController {
     public ProdutoMinDTO findById(@PathVariable Long id) {
         ProdutoMinDTO result = produtoService.findById(id);
         return result;
+    }
+
+    @DeleteMapping
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
+        produtoService.delete(id);
+        return ResponseEntity.noContent().build();
     }
 }
