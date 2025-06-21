@@ -1,6 +1,7 @@
 package com.essj.warehouse.dto;
 
 import com.essj.warehouse.entities.Produto;
+import com.essj.warehouse.entities.enums.Unidade;
 
 public class ProdutoMinDTO {
 
@@ -8,7 +9,7 @@ public class ProdutoMinDTO {
     private Long id;
     private String codigo;
     private String nome;
-    private String grupo;
+    private Unidade unidade;
 
 
     public ProdutoMinDTO(){
@@ -18,7 +19,7 @@ public class ProdutoMinDTO {
         id = entity.getId();
         codigo = entity.getCodigo();
         nome = entity.getNome();
-        grupo = entity.getGrupo();
+        unidade = entity.getUnidade();
     }
 
     public Long getId() {
@@ -45,12 +46,12 @@ public class ProdutoMinDTO {
         this.nome = nome;
     }
 
-    public String getGrupo() {
-        return grupo;
+    public Unidade getUnidade() {
+        return unidade;
     }
 
-    public void setGrupo(String grupo) {
-        this.grupo = grupo;
+    public void setUnidade(Unidade unidade) {
+        this.unidade = unidade;
     }
 }
 
