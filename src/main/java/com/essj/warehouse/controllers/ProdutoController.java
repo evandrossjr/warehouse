@@ -3,6 +3,7 @@ package com.essj.warehouse.controllers;
 
 import com.essj.warehouse.dto.ProdutoMinDTO;
 import com.essj.warehouse.services.ProdutoService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -22,11 +23,17 @@ public class ProdutoController {
         return result;
     }
 
-    @GetMapping(value = "/{id}")
-    public ProdutoMinDTO findById(@PathVariable Long id) {
-        ProdutoMinDTO result = produtoService.findById(id);
+    @GetMapping(value = "/{codigo}")
+    public ProdutoMinDTO findById(@PathVariable String codigo) {
+        ProdutoMinDTO result = produtoService.findByCodigo(codigo);
         return result;
     }
+
+    @PostMapping
+    ProdutoMinDTO novoProduto(@Valid @RequestBody ProdutoMinDTO produtoMinDTO){
+        return produtoService.salvar(produtoMinDTO);
+    }
+
 
     @DeleteMapping
     public ResponseEntity<Void> delete(@PathVariable Long id) {
