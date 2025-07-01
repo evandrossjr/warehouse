@@ -3,6 +3,8 @@ package com.essj.warehouse.dto;
 import com.essj.warehouse.entities.Produto;
 import com.essj.warehouse.entities.enums.Unidade;
 
+import java.util.Date;
+
 public class ProdutoMinDTO {
 
 
@@ -10,6 +12,7 @@ public class ProdutoMinDTO {
     private String codigo;
     private String nome;
     private Unidade unidade;
+    private Date dataCadastro;
 
 
     public ProdutoMinDTO(){
@@ -20,6 +23,8 @@ public class ProdutoMinDTO {
         codigo = entity.getCodigo();
         nome = entity.getNome();
         unidade = entity.getUnidade();
+        dataCadastro = entity.getDataCadastro();
+
     }
 
     public Long getId() {
@@ -52,6 +57,14 @@ public class ProdutoMinDTO {
 
     public void setUnidade(Unidade unidade) {
         this.unidade = unidade;
+    }
+
+    public Date getDataCadastro() {
+        return dataCadastro;
+    }
+
+    public void setDataCadastro(Date dataCadastro) {
+        this.dataCadastro = dataCadastro;
     }
 }
 

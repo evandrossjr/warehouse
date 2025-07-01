@@ -1,11 +1,13 @@
 package com.essj.warehouse.entities;
 
 
+import com.essj.warehouse.dto.ProdutoDTO;
 import com.essj.warehouse.entities.enums.Unidade;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.Date;
 import java.util.Objects;
 
 @Entity
@@ -41,18 +43,21 @@ public class Produto implements Serializable {
     @Enumerated(EnumType.STRING)
     private Unidade unidade;
 
+    private Date dataCadastro;
+
 
     public Produto() {
     }
 
-    public Produto(Long id, String codigo, String nome, Unidade unidade) {
+    public Produto(Long id, String codigo, String nome, Unidade unidade, Date dataCadastro) {
         this.id = id;
         this.codigo = codigo;
         this.nome = nome;
         this.unidade = unidade;
+        this.dataCadastro = dataCadastro;
     }
 
-    public Produto(Long id, String codigo, String nome, String ean, boolean ativo, String codigoFornecedor, String marca, String modelo, String localizador, Long quantidadeEmbalagem, int quantidade, BigDecimal preco, double peso, Long estoqueMaximo, Long estoqueMinimo, String grupo, String classificacaoFiscal, String tipoDeProduto, Unidade unidade) {
+    public Produto(Long id, String codigo, String nome, String ean, boolean ativo, String codigoFornecedor, String marca, String modelo, String localizador, Long quantidadeEmbalagem, int quantidade, BigDecimal preco, double peso, Long estoqueMaximo, Long estoqueMinimo, String grupo, String classificacaoFiscal, String tipoDeProduto, Unidade unidade, Date dataCadastro) {
         this.id = id;
         this.codigo = codigo;
         this.nome = nome;
@@ -72,6 +77,7 @@ public class Produto implements Serializable {
         this.classificacaoFiscal = classificacaoFiscal;
         this.tipoDeProduto = tipoDeProduto;
         this.unidade = unidade;
+        this.dataCadastro = dataCadastro;
     }
 
     public Long getId() {
@@ -226,6 +232,14 @@ public class Produto implements Serializable {
         this.unidade = unidade;
     }
 
+    public Date getDataCadastro() {
+        return dataCadastro;
+    }
+
+    public void setDataCadastro(Date dataCadastro) {
+        this.dataCadastro = dataCadastro;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
@@ -262,4 +276,30 @@ public class Produto implements Serializable {
                 ", unidade=" + unidade +
                 '}';
     }
+
+    public static Produto convert(ProdutoDTO produtoDTO) {
+        Produto produto = new Produto();
+        produto.setCodigo(produtoDTO.getCodigo());
+        produto.setNome(produtoDTO.getNome());
+        produto.setEan(produtoDTO.getEan());
+        produto.setAtivo(produtoDTO.isAtivo());
+        produto.setCodigoFornecedor(produtoDTO.getCodigoFornecedor());
+        produto.setMarca(produtoDTO.getMarca());
+        produto.setModelo(produtoDTO.getModelo());
+        produto.setLocalizador(produtoDTO.getLocalizador());
+        produto.setQuantidadeEmbalagem(produtoDTO.getQuantidadeEmbalagem());
+        produto.setQuantidade(produtoDTO.getQuantidade());
+        produto.setPreco(produtoDTO.getPreco());
+        produto.setPeso(produtoDTO.getPeso());
+        produto.setEstoqueMaximo(produtoDTO.getEstoqueMaximo());
+        produto.setEstoqueMinimo(produtoDTO.getEstoqueMinimo()); // corrigido: usava produtoDTO na ida
+        produto.setGrupo(produtoDTO.getGrupo());
+        produto.setClassificacaoFiscal(produtoDTO.getClassificacaoFiscal());
+        produto.setTipoDeProduto(produtoDTO.getTipoDeProduto());
+        produto.setUnidade(produtoDTO.getUnidade());
+        produto.setDataCadastro(produtoDTO.getDataCadastro());
+
+        return produto;
+    }
+
 }
