@@ -8,7 +8,6 @@ import java.util.Date;
 public class ProdutoMinDTO {
 
 
-    private Long id;
     private String codigo;
     private String nome;
     private Unidade unidade;
@@ -18,22 +17,7 @@ public class ProdutoMinDTO {
     public ProdutoMinDTO(){
     }
 
-    public ProdutoMinDTO(Produto entity){
-        id = entity.getId();
-        codigo = entity.getCodigo();
-        nome = entity.getNome();
-        unidade = entity.getUnidade();
-        dataCadastro = entity.getDataCadastro();
 
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getCodigo() {
         return codigo;
@@ -65,6 +49,16 @@ public class ProdutoMinDTO {
 
     public void setDataCadastro(Date dataCadastro) {
         this.dataCadastro = dataCadastro;
+    }
+
+    public static ProdutoMinDTO toMinDTO(Produto produto) {
+        ProdutoMinDTO produtoMinDTO = new ProdutoMinDTO();
+        produtoMinDTO.setCodigo(produto.getCodigo());
+        produtoMinDTO.setNome(produto.getNome());
+        produtoMinDTO.setUnidade(produto.getUnidade());
+        produtoMinDTO.setDataCadastro(produto.getDataCadastro());
+
+        return produtoMinDTO;
     }
 }
 

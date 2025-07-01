@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class ProdutoService {
@@ -27,16 +28,24 @@ public class ProdutoService {
     @Transactional
     public List<ProdutoMinDTO> findAll(){
         List<Produto> list = produtoRepository.findAll();
-        List<ProdutoMinDTO> listDto =  list.stream().map(x-> new ProdutoMinDTO(x)).toList();
-        return listDto;
+        return list
+                .stream()
+                .map(ProdutoMinDTO::toMinDTO)
+                .collect(Collectors.toList());
     }
 
     @Transactional
-    public ProdutoMinDTO findById(Long id){
-        Produto result = produtoRepository.findById(id).get();
-        return new ProdutoMinDTO(result);
+    public ProdutoMinDTO findByCodigo(String codigo){
+        Produto result = produtoRepository.findByCodigo(codigo);
+        if (result != null){
+            return ProdutoMinDTO.toMinDTO(result);
+        }
+        return null;
     }
-
+    public ProdutoMinDTO salvar(ProdutoMinDTO produtoMinDTO){
+        Produto produto = produtoRepository.save(Produto.fromMinDTO(produtoMinDTO));
+        return  ProdutoMinDTO.toMinDTO(produto);
+    }
 
 
     @Transactional

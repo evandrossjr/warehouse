@@ -2,6 +2,7 @@ package com.essj.warehouse.entities;
 
 
 import com.essj.warehouse.dto.ProdutoDTO;
+import com.essj.warehouse.dto.ProdutoMinDTO;
 import com.essj.warehouse.entities.enums.Unidade;
 import jakarta.persistence.*;
 
@@ -277,7 +278,7 @@ public class Produto implements Serializable {
                 '}';
     }
 
-    public static Produto convert(ProdutoDTO produtoDTO) {
+    public static Produto fromDTO(ProdutoDTO produtoDTO) {
         Produto produto = new Produto();
         produto.setCodigo(produtoDTO.getCodigo());
         produto.setNome(produtoDTO.getNome());
@@ -298,6 +299,16 @@ public class Produto implements Serializable {
         produto.setTipoDeProduto(produtoDTO.getTipoDeProduto());
         produto.setUnidade(produtoDTO.getUnidade());
         produto.setDataCadastro(produtoDTO.getDataCadastro());
+
+        return produto;
+    }
+
+    public static Produto fromMinDTO(ProdutoMinDTO produtoMinDTO) {
+        Produto produto = new Produto();
+        produto.setCodigo(produtoMinDTO.getCodigo());
+        produto.setNome(produtoMinDTO.getNome());
+        produto.setUnidade(produtoMinDTO.getUnidade());
+        produto.setDataCadastro(produtoMinDTO.getDataCadastro());
 
         return produto;
     }

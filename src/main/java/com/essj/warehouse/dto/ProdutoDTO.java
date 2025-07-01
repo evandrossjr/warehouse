@@ -197,7 +197,7 @@ public class ProdutoDTO {
         this.dataCadastro = dataCadastro;
     }
 
-    public static ProdutoDTO convert(Produto produto){
+    public static ProdutoDTO toDTO(Produto produto){
         ProdutoDTO produtoDTO = new ProdutoDTO();
         produtoDTO.setCodigo(produto.getCodigo());
         produtoDTO.setNome(produto.getNome());
